@@ -30,6 +30,8 @@ def read_config():
     """
     filepath = get_config_file()
     config = ConfigParser()
-    config.read(filepath)
+    conf_path = config.read(filepath)[0]
     svr_conf = config[config['default']['use']]
-    return dict(svr_conf.items())
+    r = dict(svr_conf.items())
+    r['conf_path'] = conf_path
+    return r
