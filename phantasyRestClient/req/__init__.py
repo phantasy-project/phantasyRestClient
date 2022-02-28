@@ -1,9 +1,8 @@
 import requests
-from phantasyRestClient.config import read_config
+from phantasyRestClient.config import conf_dict
 from phantasyRestClient.req.mp import MachinePortalResources
 
-conf = read_config()
 session = requests.Session()
 # mp resources
 MachinePortalResources.SESSION = session
-MachinePortalResources.URL = conf['bind']
+MachinePortalResources.URL = conf_dict['bind']
