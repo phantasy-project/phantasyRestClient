@@ -122,3 +122,13 @@ class MachinePortalResources:
                                              'Non-existing field'):
             return None
         return r.json()['value']
+
+    @staticmethod
+    def getLattice() -> dict:
+        """Return a dict of machine/segment: {'machine': <machine-name>, 'segment': <segment-name>}
+        """
+        r = MachinePortalResources.SESSION.get(
+                f"{MachinePortalResources.URL}/lattice")
+        if not r.ok:
+            return None
+        return r.json()
