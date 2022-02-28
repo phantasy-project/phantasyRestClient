@@ -2,6 +2,10 @@ import pytest
 from phantasyRestClient import MachinePortalResources as mp_res
 
 
+def test_getLattice():
+    assert mp_res.getLattice() == {'machine': 'FRIB', 'segment': 'LINAC'}
+
+
 def test_getElements():
     """Get all elements, *F1S1*, QUAD"""
     r = mp_res.getElements(name_pattern="*F1S1*", type_pattern="QUAD")
@@ -15,26 +19,36 @@ def test_getElemPos():
     assert mp_res.getElemPos2(name) == 1.611836
     assert mp_res.getElemPos(name) == [(0.988163, 1.611836)]
 
+
 def test_getElemType():
     name = "FS_F1S1:Q_D1013"
     assert mp_res.getElemType(name) == "QUAD"
+
 
 def test_getElemTypeAlias():
     name = "FS_F1S1:Q_D1013"
     assert mp_res.getElemTypeAlias(name) == "QUAD_FSQ1"
 
+
 def test_getElemNameAlias():
     name = "FS_F1S1:Q_D1013"
     assert mp_res.getElemNameAlias(name) == "RT quadrupole"
 
+
 def test_getElemFields():
     name = "FS_F1S1:Q_D1013"
-    assert mp_res.getElemFields(name) == [['I', 'B2', 'PWRSTS', 'POWER_STATUS']]
+    assert mp_res.getElemFields(name) == [[
+        'I', 'B2', 'PWRSTS', 'POWER_STATUS'
+    ]]
+
 
 def test_getElemPVs():
     name = "FS_F1S1:Q_D1013"
-    assert mp_res.getElemPVs(name, "I", "readback") == [['FS_F1S1:PSQ_D1013:I_RD']]
-    assert mp_res.getElemPVs(name, "I", "setpoint") == [['FS_F1S1:PSQ_D1013:I_CSET']]
+    assert mp_res.getElemPVs(name, "I",
+                             "readback") == [['FS_F1S1:PSQ_D1013:I_RD']]
+    assert mp_res.getElemPVs(name, "I",
+                             "setpoint") == [['FS_F1S1:PSQ_D1013:I_CSET']]
+
 
 def test_convert():
     name = "FS_F1S1:Q_D1013"
