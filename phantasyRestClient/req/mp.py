@@ -86,12 +86,13 @@ class MachinePortalResources:
         return [r.json()]
 
     @staticmethod
-    def convert(name: str, value: float, field: str) -> float:
+    def convert(name: str, value: float, field1: str, field2: str) -> float:
         r = MachinePortalResources.SESSION.post(
             f"{MachinePortalResources.URL}/devices/convert/{name}",
             params={
                 'value': value,
-                'field': field
+                'field': field1,
+                'to_field': field2
             })
         if not r.ok or r.json() == 'Non-existing device':
             return None
