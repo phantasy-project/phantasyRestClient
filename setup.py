@@ -16,17 +16,16 @@ extra_require = {
 }
 
 
-def set_entry_points():
-    r = {}
-    r['console_scripts'] = [
-        'pyarchappl-get=archappl.scripts.get:main',
-    ]
-    return r
+#def set_entry_points():
+    #r = {}
+    #r['console_scripts'] = [
+    #]
+    #return r
 
 
 setup(
     name='phantasyRestClient',
-    version='0.1.1',
+    version='0.1.2',
     description='Python interface to PHANTASY-REST',
     long_description=readme(),
     long_description_content_type='text/markdown',
