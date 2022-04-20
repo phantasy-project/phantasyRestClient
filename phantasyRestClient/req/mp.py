@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """Request for resources from mp (MachinePortal) router.
 """
+import json
 
 
 class MachinePortalResources:
@@ -133,3 +134,18 @@ class MachinePortalResources:
         if not r.ok:
             return None
         return r.json()
+
+    @staticmethod
+    def calcEnergyLoss(projectile: dict, material: dict) -> dict:
+        """Calculate energy loss with ATIMA.
+        """
+        r = MachinePortalResources.SESSION.post(
+                f"{MachinePortalResources.URL}/physics/atima/calc",
+                data=json.dumps({
+                    'projectile': projectile,
+                    'material': material,
+                }))
+        if not r.ok:
+            return None
+        return r.json()
+

@@ -38,7 +38,7 @@ def test_getElemNameAlias():
 def test_getElemFields():
     name = "FS_F1S1:Q_D1013"
     assert mp_res.getElemFields(name) == [[
-        'I', 'B2', 'PWRSTS', 'POWER_STATUS'
+        'I', 'B2', 'B', 'L', 'PWRSTS', 'POWER_STATUS'
     ]]
 
 
@@ -52,6 +52,24 @@ def test_getElemPVs():
 
 def test_convert():
     name = "FS_F1S1:Q_D1013"
-    b2_100 = mp_res.convert(name, 100, "I")
+    b2_100 = mp_res.convert(name, 100, "I", "B2")
     assert b2_100 == 1.50683
-    assert mp_res.convert(name, b2_100, "B2") == 100
+    assert mp_res.convert(name, b2_100, "B2", "I") == 100
+
+
+def test_calcEnergyLoss():
+    p = {"A": 238, "Z": 92, "Ek": 1000}
+    m = {"A": 63.546, "Z": 29, "thickness": 1000}
+    r = mp_res.calcEnergyLoss(p, m)
+    r0 = {
+        'dE/dx': 14.518020957575775,
+        'Ek': 938.6732788085938,
+        'Ek_std': 0.28671697408211333,
+        'range_in': 12592.18308165448,
+        'range_out': 11592.183580096036,
+        'range_std': 11.897422600402564,
+        'angle_std': 1.0526343248784542,
+        'q_in': 91.76187896728516,
+        'q_out': 91.74201965332031
+    }
+    assert r == r0
