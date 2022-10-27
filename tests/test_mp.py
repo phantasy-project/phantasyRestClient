@@ -38,7 +38,7 @@ def test_getElemNameAlias():
 def test_getElemFields():
     name = "FS_F1S1:Q_D1013"
     assert mp_res.getElemFields(name) == [[
-        'I', 'B2', 'B', 'L', 'PWRSTS', 'POWER_STATUS'
+        'I', 'B2', 'I1', 'B', 'I0', 'L', 'PWRSTS', 'POWER_STATUS'
     ]]
 
 
